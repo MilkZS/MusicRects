@@ -16,11 +16,20 @@ public class MusicView extends View {
     private String TAG = "MusicView";
     private boolean DBG = false;
 
+    /** The length and width of the custom view display interface   */
     private int viewWidth = 1000;
     private int viewHeight = 400;
+
+    /** counts ot rect shows */
     private int count = 10;
+
+    /** height band for random number */
     private int rectHeight = viewHeight - 100;
+
+    /** Width of rect */
     private int rectWidth = 50;
+
+    /** Internal of two Rect */
     private int rectSpace = 3;
 
     private Paint paint = new Paint();
@@ -49,7 +58,7 @@ public class MusicView extends View {
         for(int i=0;i<count;i++){
             int y = random.nextInt(rectHeight) + 30;
             int x = i*rectSpace + i*rectWidth;
-            Log.d(TAG,"y is " + y);
+            if (DBG)Log.d(TAG,"y is " + y);
             canvas.drawRect(x,y,x+rectWidth,viewHeight,paint);
             y = y - 10;
             paint.setStrokeWidth(5);
