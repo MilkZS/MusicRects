@@ -8,6 +8,7 @@
 
   <com.milkzs.android.music.MusicView
       android:layout_height="match_parent"
-      android:layout_width="match_parent"/>
+      android:layout_width="match_parent"
+      app:count_rect="20"/>
 
 </android.support.constraint.ConstraintLayout>

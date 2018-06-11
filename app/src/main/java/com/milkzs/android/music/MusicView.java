@@ -1,6 +1,7 @@
 package com.milkzs.android.music;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,6 +33,14 @@ public class MusicView extends View {
     /** Internal of two Rect */
     private int rectSpace = 3;
 
+    /** frequency of refresh  */
+    private int frequency = 300;
+
+    /** color of Rect */
+    private int color_paint = Color.GREEN;
+
+    private int leftSpace = 3;
+
     private Paint paint = new Paint();
     private Random random  = new Random();
 
@@ -41,7 +50,30 @@ public class MusicView extends View {
 
     public MusicView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        paint.setColor(Color.GREEN);
+
+        TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.MusicView);
+
+        for(int i=0;i<ta.length();i++){
+            switch (ta.getIndex(i)){
+                case R.styleable.MusicView_width_rect:{
+                    rectWidth = ta.getInt(ta.getIndex(i),rectWidth);
+                }break;
+                case R.styleable.MusicView_height_rect:{
+                    rectHeight = ta.getInt(ta.getIndex(i),rectHeight);
+                }break;
+                case R.styleable.MusicView_color_rect:{
+                    color_paint = ta.getInt(ta.getIndex(i),color_paint);
+                }break;
+                case R.styleable.MusicView_frequency_rect:{
+                    frequency = ta.getInt(ta.getIndex(i),frequency);
+                }break;
+                case R.styleable.MusicView_count_rect:{
+                    count = ta.getInt(ta.getIndex(i),count);
+                }break;
+            }
+        }
+
+        paint.setColor(color_paint);
     }
 
     @Override
@@ -57,7 +89,7 @@ public class MusicView extends View {
 
         for(int i=0;i<count;i++){
             int y = random.nextInt(rectHeight) + 30;
-            int x = i*rectSpace + i*rectWidth;
+            int x = i*rectSpace + i*rectWidth + 3;
             if (DBG)Log.d(TAG,"y is " + y);
             canvas.drawRect(x,y,x+rectWidth,viewHeight,paint);
             y = y - 10;
@@ -65,6 +97,6 @@ public class MusicView extends View {
             canvas.drawLine(x,y,x+rectWidth,y,paint);
         }
 
-        postInvalidateDelayed(400);
+        postInvalidateDelayed(frequency);
     }
 }

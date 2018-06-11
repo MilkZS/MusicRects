@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MusicView">
+
+        <attr name="width_rect" format="integer|dimension" />
+
+        <attr name="height_rect" format="integer|dimension" />
+
+        <attr name="color_rect" format="color" />
+
+        <attr name="count_rect" format="integer" />
+
+        <attr name="frequency_rect" format="integer" />
+
+    </declare-styleable>
+
+</resources>
